@@ -70,10 +70,10 @@
             <div class="block block-rounded">
                 <div class="block-content bg-body-light">
                     <!-- Search -->
-                    <form action="be_pages_ecom_products.html" method="post" onsubmit="return false;">
+                    <form action="{{route('surat.masuk.cari')}}" method="get">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Cari Surat..">
+                                <input type="text" class="form-control" placeholder="Cari Surat.." name="cari">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-secondary">
                                         <i class="fa fa-search"></i>

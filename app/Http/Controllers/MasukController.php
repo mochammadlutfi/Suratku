@@ -325,4 +325,10 @@ class MasukController extends Controller
 
         }
     }
+    public function cari(Request $request)
+    {
+        $data = $request->cari;
+        $surat_data = SuratMasuk::where('dari','LIKE','%' . $data . '%')->paginate();
+        return view('masuk.index',['surat_data'=>$surat_data])->with('total_surat');
+    }
 }

@@ -7,8 +7,8 @@
             <div class="block block-rounded block-transparent bg-gd-sea">
                 <div class="block-content">
                     <div class="py-20 text-center">
-                        <h1 class="font-w700 text-white mb-10">Surat Keluar</h1>
-                        <h2 class="h4 font-w400 text-white-op">Kelola Surat Keluar</h2>
+                        <h1 class="font-w700 text-white mb-10">Surat Masuk</h1>
+                        <h2 class="h4 font-w400 text-white-op">Kelola Surat Masuk</h2>
                     </div>
                 </div>
             </div>
@@ -65,15 +65,15 @@
                         </a>
                     </div>
                 </div>
-                Surat Keluar ({{ $total_surat }})
+                Surat Masuk ({{ $total_surat }})
             </div>
             <div class="block block-rounded">
                 <div class="block-content bg-body-light">
                     <!-- Search -->
-                    <form action="be_pages_ecom_products.html" method="post" onsubmit="return false;">
+                    <form action="{{ route('surat.keluar.cari') }}" method="get" >
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Cari Surat..">
+                                <input type="text" class="form-control" placeholder="Cari Surat.." name = "cari">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-secondary">
                                         <i class="fa fa-search"></i>
@@ -86,13 +86,13 @@
                 </div>
                 <div class="block-content">
                     <!-- Products Table -->
-                    @if($surat_data <> '')
+                    
                     <table class="js-table-checkable table table-hover js-table-checkable-enabled">
                         <thead>
                             <tr>
                                 <th style="width: 100px;">No. Indeks</th>
-                                <th class="d-none d-sm-table-cell">Pengolah</th>
                                 <th class="d-none d-sm-table-cell">Ringkasan Surat</th>
+                                <th class="d-none d-sm-table-cell">Tujuan Surat</th>
                                 <th class="d-none d-sm-table-cell">Keterangan</th>
                                 <th>Status</th>
                                 <th class="d-none d-md-table-cell">Tgl Terima</th>
@@ -100,29 +100,34 @@
                         </thead>
                         <tbody>
                             @foreach ($surat_data as $d)
-                                <?php
-                                    if($d->keterangan == null){
-                                        $ket = 'Tidak Ada Keterangan Tambahan';
-                                    }else{
-                                        $ket = $d->keterangan;
-                                    }
-                                ?>
-                            <tr class="clickable-row" data-href="{{ url('surat/keluar/detail/'.$d->id) }}">
+                            <tr class="clickable-row" data-href="{{ url('surat/masuk/detail/'.$d->id) }}">
                                 <td>{{ $d->no_indeks }}</td>
-                                <td>{{ $d->pengolah }}</td>
                                 <td>
-                                    <p class="font-w600 mb-10">{{ $d->tujuan }}</p>
+                                    <p class="font-w600 mb-10">{{ $d->role->name }}</p>
                                     <p class="text-muted mb-0">{{ $d->nomor }}</p>
                                     <p class="text-muted mb-0">{{ $d->perihal }}</p>
                                 </td>
+                                <th class="d-none d-sm-table-cell">{{ $d->kepada }}</th>
                                 <td>
-                                    <p class="font-w600 mb-10">{{ $ket }}</p>
+                                    @if($d->keterangan == null || $d->keterangan == '')
+                                        <p class="font-w600 mb-10">Tidak Ada Keterangan Tambahan</p>
+                                    @else
+                                        <p class="font-w600 mb-10">{{ $d->keterangan }}</p>
+                                    @endif
                                 </td>
                                 <td class="d-none d-sm-table-cell">
-                                    <span class="badge badge-info">Business</span>
+                                    @if($d->disposisi->status == 0)
+                                        <span class="badge badge-danger">Belum</span>
+                                    @elseif($d->disposisi->status == 1)
+                                        <span class="badge badge-warning">Kasubbag</span>
+                                    @elseif($d->disposisi->status == 2)
+                                        <span class="badge badge-info">Sekretaris</span>
+                                    @else
+                                        <span class="badge badge-success">Disposisi</span>
+                                    @endif
                                 </td>
                                 <td class="d-none d-sm-table-cell">
-                                    <em class="text-muted">{{ $d->created_at }}</em>
+                                    <em class="text-muted">{{ date("d-m-Y", strtotime($d->created_at)) }}</em>
                                 </td>
                             </tr>
                             @endforeach
@@ -133,16 +138,7 @@
                     <!-- Navigation -->
                     {{$surat_data->links()}}
                     <!-- END Navigation -->
-                    @else
-                    <div class="row justify-content-center">
-                        <div class="col-md-5">
-                            <center>
-                                <img class="text-center" src="{{ asset('assets/img/illustration/no_data.svg') }}" width="70%">
-                                <h3 class="text-center mt-15">Tidak Ada Data Surat Keluar</h3>
-                            </center>
-                        </div>
-                    </div>
-                    @endif
+                    
                 </div>
             </div>
             <!-- END Default Elements -->

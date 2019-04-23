@@ -191,4 +191,10 @@ class KeluarController extends Controller
         // return redirect('surat/keluar/data/');
         dd($id);
     }
+    public function cari(Request $request){
+        $data = $request->cari;
+        $surat_data = SuratKeluar::where('kepada','LIKE','%' .$data. '%')->paginate();
+        // dd($surat_data);
+        return view('keluar.index',['surat_data' => $surat_data])->with('total_surat');
+    }
 }

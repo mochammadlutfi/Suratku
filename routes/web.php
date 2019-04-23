@@ -27,6 +27,7 @@ Route::group(['prefix' => 'surat'], function () {
         Route::post('/update/{id}', 'MasukController@update')->name('surat.masuk.update');
         Route::post('/hapus/{$id}','MasukController@delete_surat')->name('surat.masuk.hapus');
         Route::post('paraf', 'MasukController@paraf')->name('surat.masuk.paraf');
+        Route::get('/data/cari','MasukController@cari')->name('surat.masuk.cari');
     });
 
 
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'surat'], function () {
         Route::get('/edit/{id}', 'KeluarController@edit')->name('surat.keluar.edit');
         Route::post('update', 'KeluarController@update')->name('surat.keluar.update');
         Route::get('/delete/{$id}', 'KeluarController@delete')->name('surat.keluar.delete');
+        Route::get('/data/cari','KeluarController@cari')->name('surat.keluar.cari');
     });
 
     Route::group(['prefix' => 'disposisi'], function () {
