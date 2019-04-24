@@ -328,7 +328,12 @@ class MasukController extends Controller
     public function cari(Request $request)
     {
         $data = $request->cari;
-        $surat_data = SuratMasuk::where('dari','LIKE','%' . $data . '%')->paginate();
+        $surat_data = SuratMasuk::when($request->cari, function ($query) use ($request) {
+            $query->where('no_indeks', 'like', "%{$request->cari}%")
+                ->orWhere('kepada', 'like', "%{$request->cari}%")
+                ->orWhere('dari', 'like', "%{$request->cari}%")
+                ->orWhere('tgl_surat','like',"{$request->cari}");
+        })->paginate();
         return view('masuk.index',['surat_data'=>$surat_data])->with('total_surat');
     }
 }

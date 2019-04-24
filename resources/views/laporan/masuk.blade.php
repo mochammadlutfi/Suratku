@@ -22,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" >Dari Tanggal</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="js-datepicker form-control" id="tgl_mulai" name="tgl_mulai" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd-mm-yyyy" placeholder="Dari Tanggal">
+                                        <input type="text" class="js-datepicker form-control" id="tgl_mulai" name="tgl_mulai" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" placeholder="Dari Tanggal">
                                         <div class="form-text text-danger"></div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" >Sampai Tanggal</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="js-datepicker form-control" id="tgl_akhir" name="tgl_akhir" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd-mm-yyyy" placeholder="Sampai Tanggal">
+                                        <input type="text" class="js-datepicker form-control" id="tgl_akhir" name="tgl_akhir" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy-mm-dd" placeholder="Sampai Tanggal">
                                         <div class="form-text text-danger"></div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     @endif
                                 </td>
                                 <td class="d-none d-sm-table-cell">
-                                    <em class="text-muted">{{ date("d-m-Y", strtotime($d->tgl_surat)) }}</em>
+                                    <em class="text-muted">{{ date("Y-m-d", strtotime($d->tgl_surat)) }}</em>
                                 </td>
                             </tr>
                             

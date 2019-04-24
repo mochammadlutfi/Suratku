@@ -73,7 +73,7 @@
                     <form action="{{route('surat.masuk.cari')}}" method="get">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Cari Surat.." name="cari">
+                                <input type="text" class="form-control" placeholder="Cari Surat.." name="cari" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd-mm-yyyy">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-secondary">
                                         <i class="fa fa-search"></i>
@@ -126,7 +126,7 @@
                                     @endif
                                 </td>
                                 <td class="d-none d-sm-table-cell">
-                                    <em class="text-muted">{{ date("d-m-Y", strtotime($d->created_at)) }}</em>
+                                    <em class="text-muted">{{ date("Y-m-d", strtotime($d->tgl_surat)) }}</em>
                                 </td>
                             </tr>
                             @endforeach

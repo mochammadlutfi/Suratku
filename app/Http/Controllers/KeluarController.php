@@ -192,8 +192,13 @@ class KeluarController extends Controller
         dd($id);
     }
     public function cari(Request $request){
-        $data = $request->cari;
-        $surat_data = SuratKeluar::where('kepada','LIKE','%' .$data. '%')->paginate();
+        // $data = $request->cari;
+        $surat_data = SuratKeluar::when($request->cari, function ($query) use ($request) {
+            $query->where('no_indeks', 'like', "%{$request->cari}%")
+                ->orWhere('kepada', 'like', "%{$request->cari}%")
+                ->orWhere('dari', 'like', "%{$request->cari}%")
+                ->orWhere('tgl_surat','like',"{$request->cari}");
+        })->paginate();
         // dd($surat_data);
         return view('keluar.index',['surat_data' => $surat_data])->with('total_surat');
     }
