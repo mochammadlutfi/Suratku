@@ -31,23 +31,20 @@ class LaporanMasukController extends Controller
    
     public function index(Request $request)
     {
-         
-       
-
         $input1 = $request->tgl_mulai;
         $input2 = $request->tgl_akhir;    
-
+        $results=[];
+        $count=[];
+            if ($input1 && $input2) {
+                $results = SuratMasuk::whereBetween('tgl_Surat',[$input1, $input2])->get();
+                $count = count($results);
+                
+            }
         
-        $result=SuratMasuk::get();
-        
-        
-        if ($input1 && $input2) {
-            $result = SuratMasuk::whereBetween('tgl_Surat',[$input1, $input2])->get();
-        }
 
     	// dd($result);
         
-        return view('laporan.masuk',['result' => $result]);
+        return view('laporan.masuk',compact('count'),['results' => $results]);
     }
 
 }

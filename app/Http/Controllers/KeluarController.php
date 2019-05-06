@@ -159,8 +159,12 @@ class KeluarController extends Controller
             'sifat.required' => 'Sifat Surat Tidak Boleh Kosong',
             'media.required'  => 'Media Surat Tidak Boleh Kosong',
         ];
-
-        $v = Validator::make($request->all(), $rules, $pesan);
+        $v = Validator::make(request()->all(), [
+            'current_password'      => 'required|password',
+            'password'              => 'required|min:10|confirmed',
+            'password_confirmation' => 'required',
+ 
+        ], $rules, $pesan);
         if ($v->fails()) {
             return back()->withInput()->withErrors($v);
             // return redirect('surat/masuk/tambah')->withErrors($v)->withInput($request->input());

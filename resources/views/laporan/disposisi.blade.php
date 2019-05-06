@@ -8,14 +8,14 @@
                 <div class="block-content">
                     <div class="py-20 text-center">
                         <h1 class="font-w700 text-white mb-10">Laporan</h1>
-                        <h2 class="h4 font-w400 text-white-op">Laporan Surat Keluar</h2>
+                        <h2 class="h4 font-w400 text-white-op">Laporan Surat Disposisi</h2>
                     </div>
                 </div>
             </div>
             <!-- Default Elements -->
             <div class="block block-rounded">
                 <div class="block-content">
-                    <form action="{{ route('laporan.keluar') }}" method="get">
+                    <form action="{{ route('laporan.disposisi') }}" method="get">
                     @csrf
                         <div class="row">
                             <div class="col-lg-5">
@@ -49,7 +49,7 @@
                     <div class="block-content">
                     <!-- Products Table -->
                     @if(! empty($result))
-                    <h3 align = "center">Data Surat Keluar Dari Tanggal {{$count}}</h3>
+                    <h3 align = "center">Data Surat Disposisi Dari Tanggal {{$count}}</h3>
                     <table class="js-table-checkable table table-hover js-table-checkable-enabled">
                         <thead>
                             <tr>

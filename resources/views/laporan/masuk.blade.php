@@ -44,10 +44,13 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- {{var_dump($result)}} -->
+                       
                     </form>
                     <div class="block-content">
                     <!-- Products Table -->
+                    @if (! empty($results))
+                    <h3 align = "center">Data Surat Masuk Dari Tanggal {{$count}}</h3>
+                    
                     <table class="js-table-checkable table table-hover js-table-checkable-enabled">
                         <thead>
                             <tr>
@@ -60,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($result as $d)
+                            @foreach ($results as $d)
                                 
                             <tr class="clickable-row">
                                 <td>{{ $d->no_indeks }}</td>
@@ -96,6 +99,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @endif
                     <!-- END Products Table -->
 
                 </div>
@@ -104,4 +108,9 @@
         </div>
     </div>
 </div>
-@endsection
+@stop
+@push('scripts')
+<script>
+
+</script>
+@endpush

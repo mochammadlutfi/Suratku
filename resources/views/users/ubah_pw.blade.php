@@ -14,7 +14,8 @@
             </div>
             <div class="block block-rounded">
                 <div class="block-content">
-                    <form action="be_pages_crypto_settings.html" method="post" onsubmit="return false;">
+                    <form action="{{ route('user.ubah_pw') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                         <div class="row items-push">
                             <div class="col-md-6">
                                 <div class="row justify-content-center">

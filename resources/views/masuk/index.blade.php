@@ -65,7 +65,7 @@
                         </a>
                     </div>
                 </div>
-                Surat Masuk ({{ $total_surat }})
+                Surat Masuk {{ $total_surat }}
             </div>
             <div class="block block-rounded">
                 <div class="block-content bg-body-light">

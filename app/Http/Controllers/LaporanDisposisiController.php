@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SuratKeluar;
+use App\Disposisi;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 
 use DB;
 
 
-class LaporanKeluarController extends Controller
+class LaporanDisposisiController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,9 +36,9 @@ class LaporanKeluarController extends Controller
         
 
         if($input1 && $input2){
-            $result = SuratKeluar::whereBetween('tgl_surat',[$input1,$input2])->get();
+            $result = Disposisi::whereBetween('created_at',[$input1,$input2])->get();
             $count = count($result);
         }
-        return view('laporan.keluar',compact('count'),['result' => $result]);
+        return view('laporan.disposisi',compact('count'),['result' => $result]);
     }
 }

@@ -127,4 +127,12 @@ class DisposisiController extends Controller
         return view('disposisi.detail', compact('role_data', 'data', 'tujuan'));
         // dd($tujuan);
     }
+    public function cari(Request $request){
+        $dispo = Disposisi::when($request->cari,function($query) use ($request){
+            $query->where('surat_id','like',"%{$request->cari}%")
+                ->orwhere('sifat','like',"%{$request->cari}%")
+                ->orwhere('catatan','like',"%{$request->cari}%");
+        })->paginate();
+        return view('disposisi.index',['dispo' => $dispo])->with('total_surat','surat_data');
+    }
 }

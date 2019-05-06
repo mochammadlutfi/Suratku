@@ -61,6 +61,10 @@ class MasukController extends Controller
             $surat_data = SuratMasuk::whereHas('disposisi', function ($query) {
                 $query->where('status', '>=', '2');
             })->paginate(5);
+        }elseif(Auth::user()->hasrole('super-admin'))
+        {
+            $total_surat = SuratMasuk::count();
+            $surat_data = SuratMasuk::orderBy('id', 'DESC')->paginate(5);
         }
 
         return view('masuk.index', compact('total_surat', 'surat_data'));

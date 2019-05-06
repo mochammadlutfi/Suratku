@@ -45,7 +45,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit',compact('user'));
+        return view('users.pengaturan',compact('user'));
     }
 
     public function tambah(Request $request)
@@ -256,7 +256,7 @@ class UserController extends Controller
                 $user->username = $request->get('username');
                 $user->email = $request->get('email');
                 $user->no_hp = $request->get('no_hp');
-                $user->foto = $nama_foto;
+                
                 if($user->save())
                 {
                     return redirect('/');
@@ -276,9 +276,40 @@ class UserController extends Controller
     {
         if ($request->isMethod('get')){
 
-            return view('users.ubah_pw');
-        }else {
+            $role_data = Role::get();
 
+            return view('users.ubah_pw', compact('role_data'));
+        }else {
+            Validator::extend('password', function ($attribute, $value, $parameters, $validator) {
+                return Hash::check($value, \Auth::user()->password);
+            });
+            $rules = [
+                'password' => 'required',
+                'password_baru' => 'required',
+                'password_baru_kf' => 'required',
+            ];
+            $pesan = [
+                'password.required' => 'NIK Tidak Boleh Kosong',
+                'password_baru.required'  => 'Nama Tidak Boleh Kosong',
+                'password_baru_kf.required' => 'Username Tidak Boleh Kosong',
+                
+            ];
+
+            $v = Validator::make($request->all(), $rules, $pesan);
+            if ($v->fails()) {
+                return back()->withInput()->withErrors($v);
+                // return redirect('surat/masuk/tambah')->withErrors($v)->withInput($request->input());
+            }
+                $user = User::find(Auth::user()->id);
+                $user->password = bcrypt(request('password_baru_kf'));
+                $user->save();
+                // if()
+                // {
+                //     return redirect('pengguna/ubah-password');
+                // }else{
+                //     App::abort(500, 'Error');
+                // }
+            }
         }
     }
-}
+

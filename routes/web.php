@@ -45,6 +45,7 @@ Route::group(['prefix' => 'surat'], function () {
         Route::match(['get', 'post'], 'tambah', 'DisposisiController@tambah')->name('surat.disposisi.tambah');
         Route::get('data', 'DisposisiController@index')->name('surat.disposisi.data');
         Route::get('/detail/{id}', 'DisposisiController@detail')->name('surat.disposisi.detail');
+        Route::get('/cari','DisposisiController@cari')->name('surat.disposisi.cari');
     });
 });
 
@@ -61,6 +62,7 @@ Route::group(['prefix' => 'agenda'],function (){
 Route::group(['prefix' => 'laporan'], function () {
     Route::get('/surat-masuk','LaporanMasukController@index')->name('laporan.masuk');
     Route::get('/surat-keluar', 'LaporanKeluarController@index')->name('laporan.keluar');
+    Route::get('/surat-disposisi','LaporanDisposisiController@index')->name('laporan.disposisi');
 });
 
 Route::group(['prefix' => 'notifikasi'], function () {

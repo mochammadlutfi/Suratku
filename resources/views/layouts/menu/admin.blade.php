@@ -40,6 +40,9 @@
                 <li>
                     <a class="{{ Request::is('laporan/surat-keluar') ? 'active' : null }}" href="{{ route('laporan.keluar') }}">Surat Keluar</a>
                 </li>
+                <li>
+                    <a class="{{ Request::is('laporan/surat-disposisi') ? 'active' : null }}" href="{{ route('laporan.disposisi') }}">Surat Disposisi</a>
+                </li>
             </ul>
         </li>
         <li class="{{ Request::is('pengguna/*') ? 'open' : null }}">
